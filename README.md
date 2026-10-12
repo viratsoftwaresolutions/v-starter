@@ -1,198 +1,147 @@
-# v-nexora-webapp
+# V Starter
 
-## AI-Powered Sales & Customer Support Platform
+**A reusable full-stack web application starter by Virat Software Solutions.**
 
-An enterprise-grade AI-powered platform designed to transform customer engagement, automate business processes, and improve operational efficiency. The solution combines conversational AI, intelligent workflow automation, and omnichannel communication into a single unified platform for sales and customer support teams.
+V Starter gives new projects a working foundation for building web applications with Next.js, React, Bun, and TypeScript. It includes a landing-page canvas, a sample dashboard, reusable UI components, an Elysia API integration, and PostgreSQL tooling.
 
-The platform enables organizations to provide 24/7 customer assistance through AI chatbots and AI voice agents. It reduces manual effort through automated workflows and intelligent task orchestration. It integrates with CRM, ERP, telephony systems, email, WhatsApp, and other communication channels to deliver personalized customer experiences.
+This repository is a **starter package, not a finished product**. Use its examples and structure as a starting point, then replace the demo content and adapt the application to your project.
 
-## Key Features
+## What's included
 
-### 🤖 AI Voice Call Agent
-- Inbound and outbound AI voice calling
-- Human-like conversations using advanced LLMs
-- Appointment scheduling
-- Lead qualification
-- Customer verification
-- Order status inquiries
-- Survey and feedback collection
-- Call recording and transcript generation
-- Sentiment and intent analysis
-- Automatic escalation to human agents
+| Area | Included stack or example |
+| --- | --- |
+| Application | Next.js 16 (App Router), React 19, TypeScript |
+| Runtime and package manager | Bun |
+| Styling and UI | Tailwind CSS 4, shadcn/ui-style components, Radix UI, Lucide icons |
+| Motion and visuals | GSAP, OGL, and shader-based visual components |
+| API | Elysia mounted at `/api` through a Next.js route handler |
+| Database | PostgreSQL, Drizzle ORM, Drizzle Kit |
+| Authentication example | Admin username/email and password sign-in endpoint |
+| Dashboard example | Sidebar, charts, cards, and a table with sample data |
+| Developer tooling | ESLint, Prettier, Husky, lint-staged, React Compiler |
 
-### 💬 AI Chatbot
-- Website chatbot
-- WhatsApp chatbot
-- Facebook Messenger integration
-- Telegram integration
-- Live chat support
-- Multilingual conversations
-- Knowledge-base powered responses
-- RAG (Retrieval-Augmented Generation)
-- FAQ automation
-- Context-aware conversations
+These are components and examples currently present in the repository. They are not a claim that enterprise authentication, AI services, or third-party integrations are implemented.
 
-### 📈 AI Sales Assistant
-- Lead qualification
-- Automated follow-ups
-- Lead scoring
-- Opportunity prediction
-- Personalized product recommendations
-- Meeting scheduling
-- Proposal generation
-- CRM updates
-- Sales pipeline automation
+## Getting started
 
-### 🎧 AI Customer Support
-- Ticket creation
-- Intelligent ticket routing
-- Auto-resolution of common issues
-- SLA monitoring
-- Customer sentiment detection
-- Priority prediction
-- Escalation management
-- Case summarization
-- Agent assistance with AI suggestions
+### Prerequisites
 
-### ⚙️ Workflow Automation
-- No-code workflow builder
-- Trigger-based automation
-- Approval workflows
-- Email automation
-- SMS automation
-- WhatsApp notifications
-- Internal task assignment
-- Event-driven workflows
-- Scheduled jobs
-- Business rule engine
+- [Bun](https://bun.sh/) installed.
+- A running PostgreSQL database **if you plan to use the database or admin sign-in example**.
 
-### 🧠 AI Knowledge Assistant
-- Company knowledge base
-- Document search
-- PDF understanding
-- SOP retrieval
-- Product documentation
-- Policy lookup
-- Internal AI assistant
-- Semantic search
-- Enterprise search
+### 1. Clone and install
 
-### 📊 Analytics Dashboard
-- Real-time KPIs
-- Sales analytics
-- Support analytics
-- AI performance metrics
-- Agent productivity
-- Customer satisfaction
-- Call analytics
-- Conversation insights
-- Workflow execution reports
+```bash
+git clone https://github.com/viratsoftwaresolutions/v-starter.git
+cd v-starter
+bun install --frozen-lockfile
+```
 
-### 🔗 Integrations
-- Salesforce
-- HubSpot
-- Zoho CRM
-- Microsoft Dynamics
-- SAP
-- Oracle ERP
-- Shopify
-- WooCommerce
-- Twilio
-- WhatsApp Business API
-- Microsoft Teams
-- Slack
-- Gmail
-- Outlook
-- REST APIs
-- Webhooks
+Access to this private repository is required to clone it.
 
-### 🔐 Enterprise Security
-- Role-based access control (RBAC)
-- Multi-factor authentication (MFA)
-- Single Sign-On (SSO)
-- Audit logs
-- Data encryption
-- GDPR compliance
-- SOC 2 readiness
-- API authentication
-- Activity monitoring
+### 2. Configure environment variables
 
-## AI Capabilities
-- Large Language Models (LLMs)
-- Retrieval-Augmented Generation (RAG)
-- Speech-to-Text
-- Text-to-Speech
-- Natural Language Processing (NLP)
-- Intent recognition
-- Entity extraction
-- Sentiment analysis
-- AI summarization
-- Recommendation engine
-- Predictive analytics
-- Intelligent routing
-- Automated decision-making
+```bash
+cp .env.example .env.local
+```
 
-## Business Benefits
-- 24/7 customer support
-- Reduced operational costs
-- Faster response times
-- Increased sales conversions
-- Improved customer satisfaction
-- Higher agent productivity
-- Reduced manual work
-- Intelligent process automation
-- Better decision-making through AI insights
+Edit `.env.local` to use your own PostgreSQL connection string and admin credentials:
 
-## Ideal Industries
-- E-commerce
-- Healthcare
-- Banking & Finance
-- Insurance
-- Education
-- Real Estate
-- Manufacturing
-- Travel & Hospitality
-- Telecommunications
-- SaaS
-- Retail
-- Government
+```dotenv
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/app_db
+AUTH_ADMIN_EMAIL=admin@example.com
+AUTH_ADMIN_PASSWORD=replace-with-a-strong-unique-password
+AUTH_ADMIN_NAME=Project Admin
+AUTH_ADMIN_USERNAME=admin
+AUTH_ADMIN_PHONE_NUMBER=0000000000
+```
 
-## Technology Stack
+The values above are examples, not safe production credentials. Never commit `.env.local` or real credentials. Bun loads this environment file when you run the project's Bun scripts.
 
-### Frontend
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- ShadCN UI
+### 3. Prepare the database (for the auth example)
 
-### Backend
-- Node.js
-- NestJS / Express
-- Python (FastAPI)
+Use a **development database**. First check connectivity, then apply the current schema:
 
-### AI & ML
-- OpenAI GPT
-- Claude
-- Google Gemini
-- LangChain
-- LlamaIndex
-- Vector Databases
-- RAG Pipelines
+```bash
+bun run db:connect
+bun run db:push
+bun run db:verify
+bun run auth:register-admin
+```
 
-### Database
-- PostgreSQL
-- Redis
-- Elasticsearch
-- MongoDB (optional)
+`db:push` applies the Drizzle schema directly. Review generated changes before using it on any database with valuable data. For managed environments, prefer reviewed migrations instead.
 
-### Infrastructure
-- Docker
-- Kubernetes
-- Nginx
-- AWS / Azure / Google Cloud
-- CI/CD Pipelines
+### 4. Run the application
 
-## Short Description (Portfolio/Website)
+```bash
+bun run dev
+```
 
-AI-Powered Sales & Customer Support Platform is an enterprise SaaS solution that combines AI voice agents, intelligent chatbots, workflow automation, CRM integration, and advanced analytics into a unified platform. It helps organizations automate customer interactions, streamline sales processes, improve support efficiency, and deliver personalized experiences through conversational AI and intelligent business automation.
+Open [http://localhost:3000](http://localhost:3000) to see the starter landing page.
+
+- `/` — landing-page canvas.
+- `/dashboard` — example dashboard using sample data.
+- `/api/auth/sign-in` — example admin sign-in API endpoint (POST); requires the database and a registered admin account.
+
+The landing page and sample dashboard are useful without running the admin setup. Database-backed features require the PostgreSQL configuration.
+
+## Useful commands
+
+| Command | Purpose |
+| --- | --- |
+| `bun run dev` | Start the development server |
+| `bun run build` | Build the Next.js application |
+| `bun run start` | Serve a production build |
+| `bun run lint` | Run ESLint on `src` |
+| `bun run format:check` | Check formatting with Prettier |
+| `bun run check` | Run lint and build |
+| `bun run db:connect` | Check PostgreSQL connectivity |
+| `bun run db:generate` | Generate Drizzle migration files |
+| `bun run db:migrate` | Apply generated database migrations |
+| `bun run db:studio` | Open Drizzle Studio |
+| `bun run db:seed` | Seed an admin account from configured values |
+| `bun run auth:register-admin` | Create or update the configured admin account |
+
+Other database maintenance scripts are defined in `package.json`. Inspect their effects before using them, especially `db:reset`.
+
+## Project structure
+
+```text
+src/
+├── app/                 Next.js routes, landing page, dashboard, API route
+├── components/          Shared components and UI primitives
+├── hooks/               Reusable React hooks
+├── lib/                 Utilities and database configuration
+└── modules/
+    └── auth/            Example auth models, service, API routes
+scripts/                 Database and admin maintenance scripts
+public/                  Static assets
+drizzle.config.ts        Drizzle Kit configuration
+.env.example             Environment variable template
+```
+
+## Adapting V Starter for a new project
+
+1. Replace the landing-page copy, visuals, and branding in `src/app/page.tsx` and related components.
+2. Replace the dashboard's sample data and UI with your real product features.
+3. Define your application's tables in `src/lib/db/schema.ts` and manage schema changes with Drizzle.
+4. Add business modules under `src/modules/` and register them in the Elysia route handler at `src/app/api/[[...slugs]]/route.ts`.
+5. Update the project name in `package.json`, along with metadata, icons, environment variables, and deployment settings.
+
+The package manifest retains the original name `v-nexora-webapp` from the source snapshot. Change it when creating a new application from this starter.
+
+## Security and production readiness
+
+**Do not treat the included sign-in example as a complete production authentication system.** It checks administrator credentials, but the returned token is a simple example value, not a fully implemented, verified session lifecycle. Before using this starter for real users, implement appropriate session verification, authorization, secure cookie handling, rate limiting, and other security controls. The dashboard is also a UI demonstration, not a protected production admin console.
+
+Do not deploy with the sample admin password or expose a production database to development scripts. Review dependencies, routes, secrets, and deployment configuration for your application.
+
+## Origin
+
+V Starter was created as an independent starter repository from a snapshot of the private [V Nexora Webapp](https://github.com/viratsoftwaresolutions/v-nexora-webapp) repository.
+
+- **Source commit:** [`9955927e36733bdde088472d112bac49a3d24644`](https://github.com/viratsoftwaresolutions/v-nexora-webapp/commit/9955927e36733bdde088472d112bac49a3d24644)
+- **Migration:** Original tracked files were copied without modification; V Starter has its own Git history.
+- **Maintainer:** Virat Software Solutions
+
+This README describes the starter as migrated. It does not change application behavior.
